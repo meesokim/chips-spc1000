@@ -1,0 +1,5 @@
+#!/bin/bash
+result=${PWD##*/}
+string=`ps -x | grep $result | awk '{print $1;}'`
+array=( $string )
+kill -9 ${array[0]}
