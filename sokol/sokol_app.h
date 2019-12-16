@@ -7204,6 +7204,8 @@ _SOKOL_PRIVATE void _sapp_circle_key_event(sapp_event_type type, int vk, bool re
 
 #if defined(__raspberrypi__)
 
+extern void ImGui_NewFrame();
+extern void _glSwapWindow();
 _SOKOL_PRIVATE void _sapp_run(const sapp_desc* desc) {
     while(true)
 	{

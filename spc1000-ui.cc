@@ -66,6 +66,7 @@ void keybutton(const char *key, int space)
 
 void spc1000ui_draw(void) {
     ui_spc1000_draw(&ui_spc1000, exec_time);
+#if 0
     bool g_bMenuOpen = false;
     ImGui::SetNextWindowPos(ImVec2(0,(float)sapp_height()-60));
     ImGui::Begin("B", &g_bMenuOpen, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_AlwaysUseWindowPadding);
@@ -102,16 +103,15 @@ void spc1000ui_draw(void) {
     keybutton("/",50);
 #endif    
     ImGui::End();
+#endif
 }
 
 void spc1000ui_init(spc1000_t* spc1000) {
-//    ImGui::CreateContext();
+    ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
-    //ImFont *font = io.Fonts->AddFontFromMemoryTTF(dump_namyangju_godic_otf, 1453448, 16.0f, NULL, io.Fonts->GetGlyphRangesKorean());
-//    ImGui::PushFontSize(14.0f);
+    ImFont *font = io.Fonts->AddFontFromMemoryTTF(dump_namyangju_godic_otf, 2420460, 16.0f, NULL, io.Fonts->GetGlyphRangesKorean());
     ui_init(spc1000ui_draw);
     ui_spc1000_desc_t desc = {0};
-    sapp_show_keyboard(true);
     desc.spc1000 = spc1000;
     desc.boot_cb = boot_cb;
     desc.create_texture_cb = gfx_create_texture;
@@ -128,7 +128,6 @@ void spc1000ui_init(spc1000_t* spc1000) {
     desc.dbg_keys.toggle_breakpoint_keycode = SAPP_KEYCODE_F9;
     desc.dbg_keys.toggle_breakpoint_name = "F9";
     ui_spc1000_init(&ui_spc1000, &desc);
-	printf("ui_spc1000_init..OK\n");
 }
 
 void spc1000ui_discard(void) {

@@ -451,9 +451,10 @@ void ui_spc1000_draw(ui_spc1000_t* ui, double time_ms) {
             y = 23;
         else 
             y = 5;
-        ImVec2 xy(0,y);// = ImGui::GetItemRectMin();
-		ImGui::SetNextWindowPos(ImVec2((float)sapp_window_width(),y));
-        ImGui::Begin("A", &g_bMenuOpen, ImGuiWindowFlags_AlwaysUseWindowPadding | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_AlwaysUseWindowPadding);
+        ImVec2 xy(0,y);
+        ImGui::Begin("_", &g_bMenuOpen, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_AlwaysUseWindowPadding);
+		ImGui::SetNextWindowPos(xy);
+		ImGui::SetWindowSize(ImVec2((float)sapp_window_width(), 40.0f));
         ImGuiStyle& style = ImGui::GetStyle();
         style.WindowBorderSize = 0.0f;  
         ImGui::SetWindowFocus("top"); 

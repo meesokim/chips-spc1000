@@ -10010,7 +10010,7 @@ _SOKOL_PRIVATE bool _sg_validate_end(void) {
     if (_sg.validate_error != _SG_VALIDATE_SUCCESS) {
         #if !defined(SOKOL_VALIDATE_NON_FATAL)
             SOKOL_LOG("^^^^  VALIDATION FAILED, TERMINATING ^^^^");
-            SOKOL_ASSERT(false);
+//            SOKOL_ASSERT(false);
         #endif
         return false;
     }

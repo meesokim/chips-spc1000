@@ -174,7 +174,8 @@ void _glSwapWindow()
 //	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	eglSwapBuffers(state->display, state->surface);
 }
- 
+
+extern "C" unsigned char * dump_namyangju_godic_otf;
 
 int main (int argc, char **argv)
 {
@@ -193,11 +194,14 @@ int main (int argc, char **argv)
 					  SDL_WINDOW_SHOWN);
 	ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
+	//io.Fonts->AddFontFromMemoryTTF(dump_namyangju_godic_otf, 2420460, 16.0f, NULL, io.Fonts->GetGlyphRangesKorean());
+	io.Fonts->AddFontFromFileTTF("namyangju_godic.otf", 14.0f, NULL, io.Fonts->GetGlyphRangesKorean());
 	io.MouseDrawCursor = true;
 	io.DisplaySize = ImVec2((float)state->screen_width, (float)state->screen_height);
 	ImGui::StyleColorsDark();
 	ImGui_ImplSDL2_InitForOpenGL(sdlWindow, state->context);
 	ImGui_ImplOpenGL3_Init(0); 	
+//    ImGui::PushFontSize(14.0f);
 #if 1	
 	test_main(state->screen_width, state->screen_height);	
 #else	
@@ -215,8 +219,8 @@ int main (int argc, char **argv)
         // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
         // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
         // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
+#if 0
         SDL_Event event;
-		ImGui_ImplSDL2_NewFrame(sdlWindow);
 		while (SDL_PollEvent(&event))
 		{
 			ImGui_ImplSDL2_ProcessEvent(&event);
@@ -225,8 +229,11 @@ int main (int argc, char **argv)
 			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(sdlWindow))
 				done = true;
 		}
-        // Start the Dear ImGui frame
+#else
 		ImGui_NewFrame();
+		ImGui::NewFrame();
+#endif	
+        // Start the Dear ImGui frame
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
@@ -282,8 +289,8 @@ extern "C" int ImGui_NewFrame()
 {
 	bool done = false;
 	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplSDL2_NewFrame(sdlWindow);	
-	ImGui::NewFrame();	
+	ImGui_ImplSDL2_NewFrame(sdlWindow);
+	//ImGui::NewFrame();
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{

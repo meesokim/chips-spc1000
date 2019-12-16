@@ -93,15 +93,10 @@ void app_init() {
         .draw_extra_cb = ui_draw,
         #endif
     });
-	// printf("gfx_init\n");
     keybuf_init(6);
-	// printf("keybuf_init\n");
     clock_init();
-	// printf("clock_init\n");
     saudio_setup(&(saudio_desc){0});
-	// printf("saudio_setup\n");
     fs_init();
-	// printf("fs_init\n");
     spc1000_type_t type = SPC1000;
     if (sargs_exists("type")) {
         if (sargs_equals("type", "spc1000")) {
@@ -114,8 +109,6 @@ void app_init() {
     #ifdef CHIPS_USE_UI
     spc1000ui_init(&spc1000);
     #endif
-	// printf("spc1000ui_init\n");
-	// printf("spc1000 tape:0x08x, size:%d, romsize=%d\n", desc.tap_spc1000, desc.tap_spc1000_size, desc.rom_spc1000_size);
     bool delay_input = false;
     if (sargs_exists("file")) {
 
@@ -173,17 +166,14 @@ void app_frame() {
         //keybuf_put("load\n");
         completed = true;
     } 
-//	printf("clock_frame_count\n");	
 	if (sargs_exists("input")) {
 		keybuf_put(sargs_value("input"));
 	}
-//	printf("keybuf_put\n");		
     uint8_t key_code;
     if (0 != (key_code = keybuf_get())) {
         spc1000_key_down(&spc1000, key_code);
         spc1000_key_up(&spc1000, key_code);
     }
-//	printf("keybuf_get\n");
 }
 
 /* keyboard input handling */

@@ -9,10 +9,10 @@
 #define SOKOL_IMGUI_IMPL
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_sdl.h"
+extern "C" int ImGui_NewFrame();
 #include "sokol_imgui.h"
 static uint64_t last_time;
 static ui_draw_t ui_draw_cb;
-
 void ui_init(ui_draw_t draw_cb) {
     simgui_desc_t simgui_desc = { };
     simgui_setup(&simgui_desc);

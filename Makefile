@@ -24,8 +24,8 @@ OBJS	= $(shell echo $(SOURCES) | sed -r 's/\.c|\.cpp|.cc/\.o/g')
 INCLUDE += -Isokol -Isokol/util -Iimgui -I/opt/vc/include -I/usr/include/SDL2
 INCLUDE += -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux
 COMMON_FLAGS += -DUSE_EGL -DIS_RPI  $(INCLUDE)
-CFLAGS   = -g -w -O3 -ffast-math -fstrict-aliasing -fomit-frame-pointer $(COMMON_FLAGS) 
-CPPFLAGS = -g $(COMMON_FLAGS)
+CFLAGS   = -O2 -s -DNDEBUG -ffast-math -fstrict-aliasing -DAARCH=64 -march=armv8-a -mtune=cortex-a53 -fomit-frame-pointer $(COMMON_FLAGS) 
+CPPFLAGS = $(COMMON_FLAGS)
 
 LIBS     =  -lSDL2 -lz -lbcm_host -lbrcmEGL -lbrcmGLESv2 -lpthread -ludev -lbcm2835 -lasound
 
